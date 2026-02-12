@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Canni 💖</title>
+    <style>
+        body { margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #ffdef2; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+        .container { text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 85%; max-width: 400px; z-index: 10; position: relative; }
+        .cat-img { width: 180px; border-radius: 10px; margin-bottom: 20px; }
+        h1 { color: #d63384; font-size: 22px; line-height: 1.4; }
+        .buttons { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 25px; position: relative; min-height: 60px; }
+        button { padding: 12px 25px; font-size: 16px; border: none; border-radius: 30px; cursor: pointer; transition: 0.2s; }
+        #yesBtn { background-color: #ff4d6d; color: white; position: relative; z-index: 100; }
+        #noBtn { background-color: #6c757d; color: white; position: absolute; white-space: nowrap; }
+        .final-msg { animation: fadeIn 1.5s ease-in forwards; font-size: 20px; color: #fff; font-weight: bold; padding: 10px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <img id="displayImg" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eXFmZzR6ZzR6ZzR6ZzR6ZzR6ZzR6ZzR6ZzR6ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" class="cat-img">
+        <h1 id="question">Will you be my Valentine, Canni? 💖</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="handleYes()">Yes</button>
+            <button id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        let yesSize = 16;
+        const noMessages = ["Think again!", "Are you sure?", "You are hurting me...", "Enough! 😭"];
+        let msgIndex = 0;
+
+        function moveNoButton() {
+            const noBtn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+            noBtn.style.position = 'fixed';
+            
+            if (msgIndex < noMessages.length) {
+                noBtn.innerText = noMessages[msgIndex];
+                msgIndex++;
+            }
+            yesSize += 15;
+            const yesBtn = document.getElementById('yesBtn');
+            yesBtn.style.fontSize = yesSize + 'px';
+            yesBtn.style.padding = (yesSize/2) + 'px ' + (yesSize) + 'px';
+        }
+
+        function handleYes() {
+            document.body.style.backgroundColor = "#ff4d6d";
+            document.getElementById('mainContainer').style.background = "transparent";
+            document.getElementById('mainContainer').style.boxShadow = "none";
+            document.getElementById('mainContainer').innerHTML = `
+                <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHN3bmYyZmt6ZzR6ZzR6ZzR6ZzR6ZzR6ZzR6ZzR6ZzR6ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MDJ9IbZY5pXNrwU9X/giphy.gif" class="cat-img">
+                <div class="final-msg">
+                    <p>“I want to spend my whole life with you and keep you as my queen, Canni.” 👸</p>
+                    <p>I love youu soo much ✨</p>
+                    <h2 style="margin-top:20px;">Happy Valentine's Day Canni Sweetheart ♥️</h2>
+                </div>`;
+            confettiEffect();
+        }
+
+        function confettiEffect() {
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = (i % 2 === 0) ? '❤️' : '💖';
+                heart.style.position = 'fixed';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '-20px';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                document.body.appendChild(heart);
+            }
+        }
+    </script>
+</body>
+</html>
